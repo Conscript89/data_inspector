@@ -2,7 +2,6 @@
 
 import argparse
 import json
-import sys
 
 import jinja2
 import jinja2.nativetypes
@@ -13,7 +12,7 @@ from textual.widgets import Header, Footer, Input, Pretty, Label
 
 
 class DataInspector(App):
-    CSS_PATH = "layout.tcss"
+    CSS_PATH = "./layout.tcss"
     BINDINGS = [
         ("ctrl+q", "quit", "Quit")
     ]
@@ -65,12 +64,8 @@ def cli_parser():
     return parser
 
 
-def main(*in_args):
-    args = cli_parser().parse_args(in_args)
+def main():
+    args = cli_parser().parse_args()
     app = DataInspector(args.datafile)
     app.run()
     return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main(*sys.argv[1:]))

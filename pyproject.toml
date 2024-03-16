@@ -1,0 +1,27 @@
+[project]
+name = 'data_inspector'
+version = '0.0.1'
+description = 'Data inspector'
+readme = 'README.md'
+requires-python = '>=3.8'
+license = {file = 'LICENSE.txt'}
+authors = [
+ {name = "Pavel Holica", email="conscript89@gmail.com"}
+]
+dependencies = [
+ "textual",
+ "jinja2",
+]
+
+[project.scripts]
+data_inspector = "data_inspector:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+data_inspector = ['layout.tcss']
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
