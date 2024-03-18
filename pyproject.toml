@@ -20,7 +20,7 @@ data_inspector = "data_inspector:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-data_inspector = ['layout.tcss']
+data_inspector = ['main.tcss']
 
 [build-system]
 requires = ["setuptools>=43.0.0", "wheel"]
