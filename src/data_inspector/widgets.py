@@ -11,6 +11,16 @@ class QueryWidget(Static):
     QueryWidget {
         layout: horizontal;
     }
+
+    #data_label {
+        align-vertical: middle;
+        border: hkey $accent;
+    }
+
+    #data_input {
+        border: hkey $accent;
+        padding-left: 0;
+    }
     """
 
     def __init__(self):
@@ -20,11 +30,12 @@ class QueryWidget(Static):
         self.expression_error = ""
 
     def compose(self) -> ComposeResult:
-        yield Label("data")
+        yield Label("data", id="data_label")
         yield Input(
             placeholder="Data Query",
             validate_on=["changed"],
             validators=Function(self.check_jinja2_expression, "Is not valid jinja2 expression."),
+            id="data_input",
         )
 
     def check_jinja2_expression(self, query):
