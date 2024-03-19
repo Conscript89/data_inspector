@@ -19,7 +19,7 @@ jobs:
     project: data_inspector
     trigger: commit
     targets:
-      - fedora-stable
+      - fedora-39
       - fedora-development
       - fedora-rawhide
     actions:
