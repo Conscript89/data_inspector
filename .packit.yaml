@@ -20,6 +20,8 @@ jobs:
     trigger: commit
     targets:
       - fedora-stable
+      - fedora-development
+      - fedora-rawhide
     actions:
       get-current-version: # this needs to be set to ensure that packit does not change the version in the specfile
         - grep -oP '^Version:\s+\K\S+' data_inspector.spec
