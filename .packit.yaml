@@ -18,6 +18,7 @@ jobs:
     owner: conscript89
     project: data_inspector
     trigger: commit
+    branch: main
     targets:
       - fedora-39
       - fedora-development
