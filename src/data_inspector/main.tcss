@@ -1,3 +1,3 @@
-Screen {
-    layout: vertical;
+QueryWidget {
+    height: 4;
 }

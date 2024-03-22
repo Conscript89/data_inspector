@@ -29,10 +29,11 @@ class DataInspector(App):
 
     def compose(self):
         yield Header()
-        yield self.query_widget
-        yield self.expression_error
-        with ScrollableContainer():
-            yield self.data_widget
+        with Vertical():
+            yield self.query_widget
+            yield self.expression_error
+            with ScrollableContainer():
+                yield self.data_widget
         yield Footer()
 
     def on_input_changed(self, event):

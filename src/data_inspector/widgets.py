@@ -8,10 +8,6 @@ from textual.widgets import Static, Input, Label
 
 class QueryWidget(Static):
     DEFAULT_CSS = """
-    QueryWidget {
-        layout: horizontal;
-    }
-
     #data_label {
         align-vertical: middle;
         border: hkey $accent;
@@ -20,6 +16,7 @@ class QueryWidget(Static):
     #data_input {
         border: hkey $accent;
         padding-left: 0;
+        margin-right: 6;
     }
     """
 
@@ -30,13 +27,14 @@ class QueryWidget(Static):
         self.expression_error = ""
 
     def compose(self) -> ComposeResult:
-        yield Label("data", id="data_label")
-        yield Input(
-            placeholder="Data Query",
-            validate_on=["changed"],
-            validators=Function(self.check_jinja2_expression, "Is not valid jinja2 expression."),
-            id="data_input",
-        )
+        with Horizontal():
+            yield Label("data", id="data_label")
+            yield Input(
+                placeholder="Data Query",
+                validate_on=["changed"],
+                validators=Function(self.check_jinja2_expression, "Is not valid jinja2 expression."),
+                id="data_input",
+            )
 
     def check_jinja2_expression(self, query):
         try:
