@@ -11,6 +11,7 @@ from textual.widgets import Header, Footer, Pretty, Label
 #import yaml
 
 from .widgets import QueryWidget
+from textual.containers import ScrollableContainer
 
 
 class DataInspector(App):
@@ -30,7 +31,8 @@ class DataInspector(App):
         yield Header()
         yield self.query_widget
         yield self.expression_error
-        yield self.data_widget
+        with ScrollableContainer():
+            yield self.data_widget
         yield Footer()
 
     def on_input_changed(self, event):
