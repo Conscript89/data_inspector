@@ -10,7 +10,7 @@ from textual.containers import Vertical
 from textual.widgets import Header, Footer, Pretty, Label
 #import yaml
 
-from .widgets import QueryWidget
+from .widgets import QueryWidget, ExpressionError
 from textual.containers import ScrollableContainer
 
 
@@ -24,30 +24,23 @@ class DataInspector(App):
         super().__init__()
         self.data = json.load(datafile)
         self.query_widget = QueryWidget()
-        self.expression_error = Label()
         self.data_widget = Pretty(self.data)
 
     def compose(self):
         yield Header()
         with Vertical():
             yield self.query_widget
-            yield self.expression_error
             with ScrollableContainer():
                 yield self.data_widget
         yield Footer()
 
     def on_input_changed(self, event):
-        self.expression_error.update(self.query_widget.expression_error)
         if not event.validation_result.is_valid:
             return
-        result = self.render_expression(data=self.data)
-        if isinstance(result, jinja2.Undefined):
-            self.expression_error.update('Undefined variable')
-            return
-        self.data_widget.update(result)
-
-    def render_expression(self, **kwargs):
-        return self.query_widget.query_template(**kwargs)
+        try:
+            self.data_widget.update(self.query_widget.filter_data(self.data))
+        except ExpressionError:
+            pass
 
 
 def cli_parser():
