@@ -10,37 +10,34 @@ from textual.containers import Vertical
 from textual.widgets import Header, Footer, Pretty, Label
 #import yaml
 
-from .widgets import QueryWidget, ExpressionError
+from .widgets import InputWidget, ExpressionError
 from textual.containers import ScrollableContainer
 
 
 class DataInspector(App):
     CSS_PATH = "main.tcss"
     BINDINGS = [
-        ("ctrl+q", "quit", "Quit")
+        ("ctrl+q", "quit", "Quit"),
+        ("ctrl+s", "save_selection", "Save/query")
     ]
 
     def __init__(self, datafile):
         super().__init__()
-        self.data = json.load(datafile)
-        self.query_widget = QueryWidget()
-        self.data_widget = Pretty(self.data)
+        data = json.load(datafile)
+        self.data_widget = Pretty(data)
+        self.data_widget.full_data = data
+        self.input_widget = InputWidget(self.data_widget)
 
     def compose(self):
         yield Header()
         with Vertical():
-            yield self.query_widget
+            yield self.input_widget
             with ScrollableContainer():
                 yield self.data_widget
         yield Footer()
 
-    def on_input_changed(self, event):
-        if not event.validation_result.is_valid:
-            return
-        try:
-            self.data_widget.update(self.query_widget.filter_data(self.data))
-        except ExpressionError:
-            pass
+    def action_save_selection(self):
+        self.input_widget.switch()
 
 
 def cli_parser():
