@@ -7,18 +7,6 @@ from textual.widgets import Static, Input, Label
 
 
 class QueryWidget(Static):
-    DEFAULT_CSS = """
-    #data_label {
-        align-vertical: middle;
-        border: hkey $accent;
-    }
-
-    #data_input {
-        border: hkey $accent;
-        padding-left: 0;
-        margin-right: 6;
-    }
-    """
 
     def __init__(self):
         super().__init__()

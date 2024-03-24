@@ -1,3 +1,14 @@
 QueryWidget {
     height: 4;
 }
+
+#data_label {
+    align-vertical: middle;
+    border: hkey $accent;
+}
+
+#data_input {
+    border: hkey $accent;
+    padding-left: 0;
+    margin-right: 6;
+}
