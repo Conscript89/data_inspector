@@ -15,7 +15,7 @@ class QueryWidget(Static):
         super().__init__()
         self.jinja_env = jinja2.nativetypes.NativeEnvironment()
         self.query_template = None
-        self.expression_error = Label()
+        self.expression_error = Label(classes="error_label")
 
     def compose(self) -> ComposeResult:
         with Vertical():

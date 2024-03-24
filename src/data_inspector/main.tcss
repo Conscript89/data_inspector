@@ -12,3 +12,8 @@ QueryWidget {
     padding-left: 0;
     margin-right: 6;
 }
+
+.error_label {
+    color: red;
+    text-style: bold;
+}
